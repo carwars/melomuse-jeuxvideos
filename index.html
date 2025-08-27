@@ -1,4 +1,3 @@
-<!-- test redeploiement -->
 <!doctype html>
 <html lang="fr">
 <head>
@@ -61,7 +60,7 @@
           <article class="tile">
             <h3>🎵 L’Oreille Magique</h3>
             <p>Écoute active & mémoire auditive</p>
-            <a href="https://exemple.com/oreille-magique" target="_blank" rel="noopener">Ouvrir</a>
+            <a href="#" target="_blank" rel="noopener">Ouvrir</a>
           </article>
           <article class="tile">
             <h3>🟦 Simon</h3>
@@ -71,12 +70,12 @@
           <article class="tile">
             <h3>⛰️ L’Escalier des hauteurs</h3>
             <p>Associer la note jouée à la bonne marche</p>
-            <a href="https://exemple.com/escalier-hauteurs" target="_blank" rel="noopener">Ouvrir</a>
+            <a href="#" target="_blank" rel="noopener">Ouvrir</a>
           </article>
           <article class="tile">
             <h3>🃏 Jeu des cartes</h3>
             <p>Cartes corporelles & visuelles (musicothérapie)</p>
-            <a href="https://exemple.com/jeu-des-cartes" target="_blank" rel="noopener">Ouvrir</a>
+            <a href="#" target="_blank" rel="noopener">Ouvrir</a>
           </article>
         </div>
       </section>
@@ -87,16 +86,11 @@
   </div>
 
 <script>
-/** CONFIG — remplace HASH par celui de ton mot de passe atelier
- * Comment générer le hash (dans la console du navigateur) :
- *   const s="TonMotDePasse2025!";
- *   const h=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
- *   Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("")
- */
-const PASSWORD_HASH = "17f84ead6b4df1adade21da5d4e5fe0f682b2f6265aa462e720b2ddcd43c47d5"; // <- colle ici le SHA-256 du mot de passe
+/** CONFIG — mot de passe actuel = "melomuse2025" */
+const PASSWORD_HASH = "17f84ead6b4df1adade21da5d4e5fe0f682b2f6265aa462e720b2ddcd43c47d5";
 
-// (facultatif) restreindre par session/jour ? ajoute ?session=2025-09-06 au QR
-const REQUIRED_SESSION = null; // ex: "2025-09-06" si tu veux filtrer
+// (optionnel) Restreindre par session (ex: ajouter ?session=2025-09-06 au QR)
+const REQUIRED_SESSION = null; // ex: "2025-09-06"
 
 const $pass = document.getElementById('pass');
 const $status = document.getElementById('status');
@@ -136,7 +130,6 @@ $form.addEventListener('submit', async (e) => {
     $links.style.display = 'block';
     $okmsg.textContent = "Accès autorisé. Bonne démo !";
     $form.style.display = 'none';
-    // (facultatif) stocker l'accès pour éviter de retaper
     sessionStorage.setItem('melomuse_ok', '1');
   } else {
     $status.textContent = "Mot de passe incorrect.";
@@ -158,5 +151,3 @@ $pass.addEventListener('keydown', (e) => {
 </script>
 </body>
 </html>
-
-
