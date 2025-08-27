@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Portail des jeux vidéos Melomuse</title>
 <style>
-  :root { --bg:#0f1115; --card:#171923; --text:#e6e6e6; --muted:#9aa3b2; --accent:#7dd3fc; --ok:#34d399; --err:#fca5a5; }
+  :root { --bg:#0f1115; --card:#171923; --text:#eef2f7; --muted:#a6b0bf; --accent:#7dd3fc; --ok:#34d399; --err:#fca5a5; }
   *{box-sizing:border-box}
-  /* Base + tailles renforcées pour l’accessibilité */
+  /* Base + tailles renforcées pour l’accessibilité (encore +) */
   body{
     margin:0;
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",sans-serif;
@@ -16,51 +16,59 @@
     min-height:100svh;
     display:grid;
     place-items:center;
-    padding:28px;
-    font-size:18px;           /* + lisible */
-    line-height:1.55;
+    padding:32px;
+    font-size:20px;        /* ↑ */
+    line-height:1.6;
   }
   .card{
     width:100%;
-    max-width:980px;          /* + large */
+    max-width:1080px;      /* ↑ */
     background:linear-gradient(180deg,#1b1f2a 0,#12141b 100%);
     border:1px solid #2a2f3d;
-    border-radius:22px;       /* + doux */
-    box-shadow:0 12px 36px rgba(0,0,0,.35);
+    border-radius:22px;
+    box-shadow:0 14px 40px rgba(0,0,0,.38);
     overflow:hidden;
   }
-  header{padding:26px 26px 0;display:flex;gap:14px;align-items:center}
-  .logo{width:52px;height:52px;border-radius:14px;background:conic-gradient(from 0deg,#60a5fa,#a78bfa,#34d399,#60a5fa);filter:saturate(120%)}
-  h1{margin:0;font-size:24px;letter-spacing:.2px}
-  .sub{margin:4px 0 0;color:var(--muted);font-size:16px}
-  main{padding:26px}
-  .gate{display:grid;gap:14px;margin:8px 0 22px}
-  label{font-size:16px;color:var(--muted)}
-  input[type=password]{
-    width:100%;padding:14px 16px;border:1px solid #2a2f3d;border-radius:14px;
-    background:#0f1115;color:var(--text);outline:none;font-size:18px;
+  header{padding:28px 28px 0;display:flex;gap:16px;align-items:center;justify-content:space-between}
+  .hgroup{display:flex;gap:14px;align-items:center}
+  .logo{width:56px;height:56px;border-radius:14px;background:conic-gradient(from 0deg,#60a5fa,#a78bfa,#34d399,#60a5fa);filter:saturate(120%)}
+  h1{margin:0;font-size:28px;letter-spacing:.2px}
+  .sub{margin:6px 0 0;color:var(--muted);font-size:18px}
+  .logout{
+    display:none;          /* visible après connexion */
+    padding:12px 16px;border:1px solid #2a2f3d;background:#171923;color:var(--text);
+    border-radius:12px;cursor:pointer;font-size:18px
   }
-  input[type=password]:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(125,211,252,.18)}
+  .logout:focus{outline:3px solid var(--accent);outline-offset:2px}
+
+  main{padding:28px}
+  .gate{display:grid;gap:16px;margin:10px 0 24px}
+  label{font-size:18px;color:var(--muted)}
+  input[type=password]{
+    width:100%;padding:16px 18px;border:1px solid #2a2f3d;border-radius:16px;
+    background:#0f1115;color:var(--text);outline:none;font-size:20px;
+  }
+  input[type=password]:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(125,211,252,.2)}
   button{
-    padding:12px 18px;border:1px solid #2a2f3d;background:#171923;color:var(--text);
-    border-radius:12px;cursor:pointer;font-size:16px
+    padding:14px 18px;border:1px solid #2a2f3d;background:#171923;color:var(--text);
+    border-radius:14px;cursor:pointer;font-size:18px
   }
   button:focus{outline:3px solid var(--accent);outline-offset:2px}
-  .row{display:flex;gap:12px;flex-wrap:wrap}
-  .err{color:var(--err);font-size:15px;min-height:1.2em}
-  .ok{color:var(--ok);font-size:15px;min-height:1.2em}
-  .links{display:none;margin-top:10px}
-  .grid{display:grid;gap:16px}
-  @media (min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .err{color:var(--err);font-size:16px;min-height:1.2em}
+  .ok{color:var(--ok);font-size:16px;min-height:1.2em}
+  .links{display:none;margin-top:12px}
+  .grid{display:grid;gap:18px}
+  @media (min-width:760px){.grid{grid-template-columns:1fr 1fr}}
   .tile{
-    border:1px solid #2a2f3d;border-radius:16px;padding:16px;background:linear-gradient(180deg,#161925,#12141b);
-    display:flex;flex-direction:column;gap:8px
+    border:1px solid #2a2f3d;border-radius:18px;padding:18px;background:linear-gradient(180deg,#161925,#12141b);
+    display:flex;flex-direction:column;gap:10px
   }
-  .tile h3{margin:0;font-size:18px}
-  .tile p{margin:0;color:var(--muted);font-size:15px}
+  .tile h3{margin:0;font-size:20px}
+  .tile p{margin:0;color:var(--muted);font-size:17px}
   .tile a{
-    margin-top:auto;display:inline-block;padding:12px 14px;border-radius:12px;border:1px solid #2a2f3d;
-    text-decoration:none;color:var(--text);font-size:16px;text-align:center
+    margin-top:auto;display:inline-block;padding:14px 16px;border-radius:14px;border:1px solid #2a2f3d;
+    text-decoration:none;color:var(--text);font-size:18px;text-align:center
   }
   .tile a:focus{outline:3px solid var(--accent);outline-offset:2px}
 </style>
@@ -68,12 +76,16 @@
 <body>
   <div class="card" role="region" aria-labelledby="title">
     <header>
-      <div class="logo" aria-hidden="true"></div>
-      <div>
-        <h1 id="title">Portail des jeux vidéos Melomuse</h1>
-        <p class="sub">Espace démo (présentiel & distanciel)</p>
+      <div class="hgroup">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 id="title">Portail des jeux vidéos Melomuse</h1>
+          <p class="sub">Espace démo (présentiel & distanciel)</p>
+        </div>
       </div>
+      <button id="logout" class="logout" type="button" aria-label="Se déconnecter">Déconnexion</button>
     </header>
+
     <main>
       <form id="gateForm" class="gate" novalidate>
         <div>
@@ -113,7 +125,6 @@
         </div>
       </section>
     </main>
-    <!-- (Footer retiré à ta demande) -->
   </div>
 
 <script>
@@ -123,12 +134,13 @@ const PASSWORD_HASH = "17f84ead6b4df1adade21da5d4e5fe0f682b2f6265aa462e720b2ddcd
 /* (optionnel) Restreindre par session : ajouter ?session=AAAA-MM-JJ au QR et mettre la même valeur ici */
 const REQUIRED_SESSION = null; // ex: "2025-09-06"
 
-const $pass = document.getElementById('pass');
+const $pass   = document.getElementById('pass');
 const $status = document.getElementById('status');
-const $okmsg = document.getElementById('okmsg');
-const $links = document.getElementById('links');
-const $form = document.getElementById('gateForm');
-const $show = document.getElementById('show');
+const $okmsg  = document.getElementById('okmsg');
+const $links  = document.getElementById('links');
+const $form   = document.getElementById('gateForm');
+const $show   = document.getElementById('show');
+const $logout = document.getElementById('logout');
 
 $show.addEventListener('click', () => {
   const on = $pass.type === 'password';
@@ -153,34 +165,50 @@ $form.addEventListener('submit', async (e) => {
     }
   }
 
-  const enc = new TextEncoder().encode(pwd);
+  const enc  = new TextEncoder().encode(pwd);
   const hbuf = await crypto.subtle.digest("SHA-256", enc);
   const hash = Array.from(new Uint8Array(hbuf)).map(b=>b.toString(16).padStart(2,"0")).join("");
 
   if (hash === PASSWORD_HASH) {
-    $links.style.display = 'block';
-    $okmsg.textContent = "Accès autorisé. Bonne démo !";
-    $form.style.display = 'none';
-    sessionStorage.setItem('melomuse_ok', '1');
+    unlock();
   } else {
     $status.textContent = "Mot de passe incorrect.";
     $pass.select();
   }
 });
 
+// Déconnexion : vide la session et réaffiche le formulaire
+$logout.addEventListener('click', () => {
+  sessionStorage.removeItem('melomuse_ok');
+  lock();
+  $pass.focus();
+});
+
 // Auto-déverrouillage si déjà validé durant la session
 if (sessionStorage.getItem('melomuse_ok') === '1') {
-  $links.style.display = 'block';
-  const gate = document.querySelector('main .gate');
-  if (gate) gate.style.display = 'none';
-  const ok = document.getElementById('okmsg');
-  if (ok) ok.textContent = "Accès restauré pour la session.";
+  unlock(true);
 }
 
 // Accessibilité : Enter soumet, Escape efface
 $pass.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { $pass.value=""; $status.textContent=""; }
 });
+
+function unlock(fromSession=false){
+  $links.style.display = 'block';
+  $form.style.display  = 'none';
+  $logout.style.display = 'inline-block';
+  if (!fromSession) sessionStorage.setItem('melomuse_ok', '1');
+  $okmsg.textContent = "Accès autorisé. Bonne démo !";
+}
+
+function lock(){
+  $links.style.display = 'none';
+  $form.style.display  = 'grid';
+  $logout.style.display = 'none';
+  $okmsg.textContent   = "";
+  $status.textContent  = "";
+}
 </script>
 </body>
 </html>
